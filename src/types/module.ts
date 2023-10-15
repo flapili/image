@@ -96,4 +96,5 @@ export interface ImageModuleProvider {
   runtime: string
   runtimeOptions: any
   setup: ProviderSetup
+  maxAge?: number
 }

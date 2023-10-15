@@ -9,6 +9,7 @@ export interface ModuleOptions extends ImageProviders {
   provider: CreateImageOptions['provider']
   presets: { [name: string]: ImageOptions }
   dir: string
+  maxAge?: number
   domains: string[]
   sharp: any
   alias: Record<string, string>

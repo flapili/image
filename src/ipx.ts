@@ -7,6 +7,7 @@ import type { ProviderSetup } from './types'
 
 type IPXRuntimeConfig = Omit<IPXOptions, 'storage' | 'httpStorage'> & { http: HTTPStorageOptions, fs: NodeFSSOptions } & {
   baseURL: string
+  maxAge?: number
 }
 
 type IPXSetupT = (setupOptions?: { isStatic: boolean }) => ProviderSetup
@@ -30,7 +31,7 @@ export const ipxSetup: IPXSetupT = setupOptions => (providerOptions, moduleOptio
   const absoluteDir = resolve(nuxt.options.srcDir, moduleOptions.dir || nuxt.options.dir.public)
   const relativeDir = relative(nitro.options.output.serverDir, nitro.options.output.publicDir)
   const ipxOptions: IPXRuntimeConfig = {
-    maxAge: providerOptions.options?.maxAge,
+    maxAge: providerOptions.maxAge ?? moduleOptions.maxAge,
     sharpOptions: moduleOptions.sharp,
     alias: moduleOptions.alias,
     baseURL: ipxBase,

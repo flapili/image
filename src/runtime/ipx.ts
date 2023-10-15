@@ -11,9 +11,8 @@ export default lazyEventHandler(() => {
 
   // TODO: Migrate to unstorage layer
   const fsDir = opts.fs?.dir ? isAbsolute(opts.fs.dir) ? opts.fs.dir : fileURLToPath(new URL(opts.fs.dir, import.meta.url)) : undefined
-
   const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : undefined
-  const httpStorage = opts.http?.domains ? ipxHttpStorage({ ...opts.http }) : undefined
+  const httpStorage = opts.http?.domains ? ipxHttpStorage({ ...opts.http, maxAge: opts.maxAge }) : undefined
   if (!fsStorage && !httpStorage) {
     throw new Error('IPX storage is not configured!')
   }
